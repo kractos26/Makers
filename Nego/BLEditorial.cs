@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Data;
-using Data.Interfaces;
 using DataEntities;
 using Dto;
 using Negocio.Interfaz;
@@ -11,11 +10,10 @@ namespace Negocio
 {
     public class BLEditorial : IBLEditorial
     {
-        private readonly IDTEditorial _dTEditorial ;
+        private readonly DTEditorial dTEditorial = new DTEditorial();
         private readonly IMapper _mapper;
-        public BLEditorial(IMapper mapper, IDTEditorial dTEditorial)
+        public BLEditorial(IMapper mapper)
         {
-            _dTEditorial = dTEditorial;
             _mapper = mapper;
         }
 
@@ -23,7 +21,7 @@ namespace Negocio
         {
             try
             {
-                List<Editorial> objEditorial = this._dTEditorial.Buscar(x => x.IdEditorial == (dtoEditorial.IdEditorial > 0 ? dtoEditorial.IdEditorial : x.IdEditorial) &&
+                List<Editorial> objEditorial = this.dTEditorial.Buscar(x => x.IdEditorial == (dtoEditorial.IdEditorial > 0 ? dtoEditorial.IdEditorial : x.IdEditorial) &&
                   x.Nombre.ToLower() == (dtoEditorial.Nombre != string.Empty ? dtoEditorial.Nombre.ToLower() : x.Nombre.ToLower())
 
                   );
@@ -47,7 +45,7 @@ namespace Negocio
         {
             try
             {
-                List<Editorial> objEditorial = this._dTEditorial.GetAll();
+                List<Editorial> objEditorial = this.dTEditorial.GetAll();
                 List<DtoEditorial> lsdtoEditorial = _mapper.Map<List<DtoEditorial>>(objEditorial);
                 return lsdtoEditorial;
             }
@@ -61,7 +59,7 @@ namespace Negocio
         {
             try
             {
-                Editorial objEditorial = this._dTEditorial.TraerUno(x => x.IdEditorial == (dtoEditorial.IdEditorial > 0 ? dtoEditorial.IdEditorial : x.IdEditorial) &&
+                Editorial objEditorial = this.dTEditorial.TraerUno(x => x.IdEditorial == (dtoEditorial.IdEditorial > 0 ? dtoEditorial.IdEditorial : x.IdEditorial) &&
                    x.Nombre.ToLower() == (dtoEditorial.Nombre != string.Empty ? dtoEditorial.Nombre.ToLower() : x.Nombre.ToLower())
 
                    );

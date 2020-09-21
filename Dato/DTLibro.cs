@@ -9,13 +9,13 @@ using System.Linq.Expressions;
 
 namespace Data
 {
-    public class DTLibro:IDTLibro
+    public class DTLibro
     {
         private readonly Repository<Libro> repocitorio;
 
-        public DTLibro(IConfiguration config)
+        public DTLibro()
         {
-            repocitorio = new Repository<Libro>(new MakersContext(config));
+            repocitorio = new Repository<Libro>(new MakersContext(""));
         }
         public Libro Adicionar(Libro Libro)
         {

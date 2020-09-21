@@ -10,11 +10,12 @@ namespace PruebaConexion.Modelos
     public partial class MakersContext : DbContext
     {
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
-        public MakersContext(IConfiguration configuration)
+        string Conection { get; set; }
+        public MakersContext(string conection)
         {
-            Configuration = configuration;
+            Conection = "Data Source=DESKTOP-5LA27IQ\\SQLEXPRESS;Initial Catalog=Makers;Integrated Security=True";
         }
 
         
@@ -32,12 +33,13 @@ namespace PruebaConexion.Modelos
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            
             if (!optionsBuilder.IsConfigured)
             {
-                var ConnectionString = Configuration.GetConnectionString("LibreriaEntities");
+                //var ConnectionString = Configuration.GetConnectionString("LibreriaEntities");
 
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-5LA27IQ\\SQLEXPRESS;Initial Catalog=Makers;Integrated Security=True");
+                optionsBuilder.UseSqlServer(Conection);
             }
         }
 

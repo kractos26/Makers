@@ -1,0 +1,9 @@
+USE Makers
+/*Listar de cada cliente: la identificación, el nombre y el apellido, con la sumatoria del valor
+total de las compras, agrupadas por año. (Identificacion, NombreCompleto, TotalCompras,
+Año)*/SELECT cl.IdCliente,cl.Nombres,cl.Apellidos,sum(cp.Valor) as Total FROM Clientecl inner join Compra cp ON cl.IdCliente = cp.IdClienteGROUP BY cl.IdCliente,cl.Nombres,cl.Apellidos/*Mostrar el nombre y apellido de todos los empleados, junto con el número total de libros
+vendidos para el año 2019, incluyendo a los empleados que no hayan realizado ninguna
+venta. (Nombre, Apellidos, TotalLibros)*/SELECT em.Nombres,em.Apellidos,count(cp.IdCompra) as TotalLibros FROM Empleado emLEFT JOIN Compra cp ON em.IdEmpleado = cp.IdCompraWHERE YEAR(cp.Fecha) = 2019GROUP BY em.Nombres,em.Apellidos/*Crear un procedimiento almacenado que, dado un año, muestre el valor total de ventas
+realizadas por cada empleado, incluyendo los que no hayan realizado ninguna venta.
+(NombreCompleto, ValorTotalVentas)*/EXEC SP_TotalVentas 2019/*Crear una consulta que indique la identificación, nombre y apellido de un cliente, junto
+con su editorial favorita, teniendo en cuenta que ésta se basa en la editorial a la quepertenece la mayoría de libros que ha comprado. (NombreCompleto, EditorialFavorita) */SELECT editorialfv.NombreCompleto,editorialfv.EditorialFavorita,max(editorialfv.cantidad) FROM (SELECT concat(cl.Apellidos,' ',cl.Nombres) AS NombreCompleto,count(ed.IdEditorial) as cantidad,ed.Nombre AS EditorialFavorita FROM Cliente cl INNER JOIN Compra cp ON cp.IdCliente = cl.IdClienteINNER JOIN Libro lb ON lb.IdLibro = cp.IdLibroINNER JOIN Editorial ed ON ed.IdEditorial = lb.IdEditorialGROUP BY cl.Nombres,cl.Apellidos,ed.Nombre) AS editorialfvGROUP BY editorialfv.NombreCompleto,editorialfv.EditorialFavorita

@@ -11,15 +11,15 @@ using System.Linq.Expressions;
 
 namespace Data
 {
-    public class DTEditorial:IDTEditorial
+    public class DTEditorial
     {
         
 
         private readonly Repository<Editorial> repocitorio;
 
-        public DTEditorial(IConfiguration config)
+        public DTEditorial()
         {
-            repocitorio = new Repository<Editorial>(new MakersContext(config));
+            repocitorio = new Repository<Editorial>(new MakersContext(""));
         }
 
         public Editorial Adicionar(Editorial Editorial)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Negocio;
 using Negocio.Interfaz;
 using System;
@@ -68,6 +69,7 @@ namespace WebLibreriaMakers.Controllers
         /// <returns>Lista de libros.</returns>
         [HttpGet]
         [Route("Todos")]
+        [Authorize]
         public ActionResult<Dto.DtoLibro> GetAll()
         {
             Response<List<Dto.DtoLibro>> response = new Response<List<Dto.DtoLibro>>();
