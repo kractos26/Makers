@@ -23,6 +23,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Negocio;
 using Negocio.Interfaz;
+using PruebaConexion.Modelos;
+using Transversal.Registrar;
 using WebLibreriaMakers.Modelo;
 
 namespace WebLibreriaMakers
@@ -70,7 +72,6 @@ namespace WebLibreriaMakers
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            var ConnectionString = Configuration.GetConnectionString("LibreriaEntities");
 
             services.AddSwaggerGen(c =>
             {
@@ -86,11 +87,13 @@ namespace WebLibreriaMakers
                 });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
+            IocRegister.AddRegistration(services);
+            services.AddDbContext<MakersDBContext>(option => option.UseSqlServer(Configuration.GetConnectionString("LibreriaEntities")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             
             //services.AddDbContext<EmployeeContext>(options => options.UseSqlServer(ConnectionString));
-            services.AddScoped<IBLLibro, BLLibro>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

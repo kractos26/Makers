@@ -12,6 +12,7 @@ namespace Negocio
     {
         private readonly DTEditorial dTEditorial = new DTEditorial();
         private readonly IMapper _mapper;
+        
         public BLEditorial(IMapper mapper)
         {
             _mapper = mapper;

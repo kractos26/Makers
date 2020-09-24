@@ -19,7 +19,7 @@ namespace Data
 
         public DTEditorial()
         {
-            repocitorio = new Repository<Editorial>(new MakersContext(""));
+            repocitorio = new Repository<Editorial>(new MakersDBContext());
         }
 
         public Editorial Adicionar(Editorial Editorial)

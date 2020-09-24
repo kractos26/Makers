@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    interface IRepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
         List<T> GetAll();
 

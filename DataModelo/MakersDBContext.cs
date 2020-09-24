@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Configuration;
 using DataEntities;
+using DataModelo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 
 namespace PruebaConexion.Modelos
 {
-    public partial class MakersContext : DbContext
+    public partial class MakersDBContext : DbContext, IMarkersDBContext
     {
 
         private IConfiguration Configuration { get; }
 
-        string Conection { get; set; }
-        public MakersContext(string conection)
+        
+        public MakersDBContext()
         {
-            Conection = "Data Source=DESKTOP-5LA27IQ\\SQLEXPRESS;Initial Catalog=Makers;Integrated Security=True";
         }
 
         
 
-        public MakersContext(DbContextOptions<MakersContext> options)
+        public MakersDBContext(DbContextOptions<MakersDBContext> options)
             : base(options)
         {
         }
@@ -36,10 +36,8 @@ namespace PruebaConexion.Modelos
             
             if (!optionsBuilder.IsConfigured)
             {
-                //var ConnectionString = Configuration.GetConnectionString("LibreriaEntities");
 
-                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(Conection);
+                //optionsBuilder.UseSqlServer();
             }
         }
 
