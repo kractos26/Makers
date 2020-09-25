@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataEntities\DataEntities.csproj" />
-    <ProjectReference Include="..\Dto\Dto.csproj" />
     <ProjectReference Include="..\Nego\Negocio.csproj" />
     <ProjectReference Include="..\Transversal\Transversal.csproj" />
   </ItemGroup>

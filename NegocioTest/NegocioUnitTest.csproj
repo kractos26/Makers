@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dto\Dto.csproj" />
     <ProjectReference Include="..\Nego\Negocio.csproj" />
   </ItemGroup>
 

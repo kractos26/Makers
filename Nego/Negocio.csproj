@@ -14,7 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DataEntities\DataEntities.csproj" />
     <ProjectReference Include="..\Dato\Data.csproj" />
-    <ProjectReference Include="..\Dto\Dto.csproj" />
+    <ProjectReference Include="..\Dtos\Dto.csproj" />
   </ItemGroup>
 
 </Project>
